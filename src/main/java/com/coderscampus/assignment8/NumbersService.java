@@ -21,25 +21,18 @@ public class NumbersService {
 			CompletableFuture<List<Integer>> numTask = CompletableFuture.supplyAsync(() -> assignment.getNumbers(), executor);
 			numTasks.add(numTask);
 		}
-//		CompletableFuture<Void> allFutures = CompletableFuture.allOf(numTasks.toArray(new CompletableFuture[numTasks.size()]));
-//		allFutures.join();
 		List<Integer> singleList =  numTasks.stream()
 											.flatMap(task -> task.join().stream())
 											.collect(Collectors.toList());
-
 			return singleList;
-		
 	}
 
 	public void printNumbersMap(List<Integer> singleList) {
 		Map<Integer, Long> numbersMap = singleList.stream()
 				  								  .collect(Collectors.groupingBy(number -> number, Collectors.counting()));
 		String entryList = numbersMap.entrySet().stream()
-							 .map(entry -> entry.getKey() + "=" + entry.getValue())
-							 .collect(Collectors.joining(","));
+												.map(entry -> entry.getKey() + "=" + entry.getValue())
+												.collect(Collectors.joining(","));
 		System.out.println(entryList);
-							 
-	
 	}
-
 }
