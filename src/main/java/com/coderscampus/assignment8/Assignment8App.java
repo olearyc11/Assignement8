@@ -9,5 +9,6 @@ public class Assignment8App {
 		NumbersService numbersService = new NumbersService();
 		List<Integer> numbers = numbersService.getListOfNumbers();
 		numbersService.printNumbersMap(numbers);
+		numbersService.closeExecutor();
 	}
 }

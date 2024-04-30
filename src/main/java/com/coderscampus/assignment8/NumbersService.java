@@ -35,4 +35,8 @@ public class NumbersService {
 												.collect(Collectors.joining(","));
 		System.out.println(entryList);
 	}
+	
+	public void closeExecutor() {
+		executor.shutdown();
+	}
 }
